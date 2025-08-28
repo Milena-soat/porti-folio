@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milena Soares | Desenvolvedora Front-End</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%23F4B8C1%22 d=%22M50 90.5l-7.4-6.7C19.4 63.8 0 46.4 0 28.5 0 12.7 12.7 0 28.5 0c8.8 0 17.1 4.1 21.5 11.2C54.4 4.1 62.7 0 71.5 0 87.3 0 100 12.7 100 28.5c0 17.9-19.4 35.3-42.6 55.3L50 90.5z%22/></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Baby Pink Accent -->
+    <!-- Application Structure Plan: O portfólio foi reestruturado para um layout de abas (tabs) após a seção Hero. A navegação principal (Sobre, Habilidades, Projetos, Jornada, Certificações) agora funciona como botões de abas, cada um revelando seu conteúdo correspondente. A seção Hero permanece como introdução estática. A seção de Contato foi movida para fora do sistema de abas, retornando à sua posição original no final da página, antes do rodapé, permitindo que o usuário role até ela após explorar as abas. Esta estrutura foi escolhida para melhorar a navegabilidade e a experiência do usuário, permitindo uma exploração mais focada do conteúdo, sem a necessidade de rolagem vertical extensa para cada seção. As transições suaves entre as abas proporcionam uma apresentação moderna e engajadora. Um botão "Contato" foi adicionado no canto superior direito para acesso rápido à seção de contato, e o e-mail na seção de contato agora usa a cor de destaque. A navegação principal por abas (Sobre, Habilidades, Projetos, Jornada, Certificações) foi removida do cabeçalho, mas permanece como botões de abas abaixo da seção Hero. -->
+    <!-- Visualization & Content Choices: Hero -> Inform, Engage -> Texto, Imagem de Perfil, Botão de CTA -> Criar conexão imediata. Abas (Sobre, Habilidades, Projetos, Jornada, Certificações) -> Organizar, Navegar -> Botões de navegação e painéis de conteúdo -> Permite exploração focada. Conteúdo das abas: Texto para Sobre Mim, Listas para Habilidades, Cards para Projetos, Linha do tempo para Jornada, e Lista para Certificações. A transição entre abas é feita com opacidade e visibilidade para um efeito fade-in/fade-out suave. Contato -> Facilitar Conexão -> Bloco de texto centralizado com ícones (LinkedIn e WhatsApp) -> Ação clara para contato. Nenhuma visualização de gráfico é utilizada, pois o conteúdo do relatório fonte é puramente textual e descritivo, sem dados quantitativos para apresentar em gráficos. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #2c3e50;
+        }
+        .accent-color { color: #F4B8C1; }
+        .bg-accent-color { background-color: #F4B8C1; }
+        .border-accent-color { border-color: #F4B8C1; }
+        .tab-button.active {
+            background-color: #F4B8C1;
+            color: white;
+            font-weight: 600;
+        }
+        .tab-panel {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .tab-panel.active {
+            display: block;
+            opacity: 1;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            left: -0.9rem; /* Ajustado para alinhar melhor com o título */
+            top: 0.25rem; /* Ajuste fino para alinhar com o texto */
+            background-color: #F4B8C1;
+            border: 3px solid #F8F7F4;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="navbar" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-end items-center">
+            <a href="#contact" class="bg-accent-color text-white font-bold py-2 px-4 rounded-full hover:opacity-90 transition-opacity transform hover:scale-105 text-sm md:text-base">
+                Contato
+            </a>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#F4B8C1] ml-4">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-200">Sobre</a>
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-gray-200">Habilidades</a>
+            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-gray-200">Projetos</a>
+            <a href="#journey" class="block py-2 px-4 text-sm hover:bg-gray-200">Jornada</a>
+            <a href="#certifications" class="block py-2 px-4 text-sm hover:bg-gray-200">Certificações</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <section id="hero" class="text-center min-h-[60vh] flex flex-col justify-center items-center mb-12 md:mb-20">
+            <img class="w-32 h-32 rounded-full object-cover border-4 border-accent-color mb-6" src="file:///C:/Users/Milena%20Soares/Documents/Fotos%20minhas%20para%20documemntos/Foto%20cortada.png" alt="Foto de perfil de Milena Soares">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">Milena Soares</h1>
+            <h2 class="text-2xl md:text-3xl font-medium text-gray-600 mb-6">Desenvolvedora Front-End</h2>
+            <p class="max-w-2xl mx-auto text-lg text-gray-700 mb-8">
+                Transformando ideias em interfaces web criativas e funcionais. Apaixonada por tecnologia e em constante aprendizado para construir experiências digitais incríveis.
+            </p>
+            <a href="#about" class="bg-accent-color text-white font-bold py-3 px-8 rounded-full hover:opacity-90 transition-opacity transform hover:scale-105">
+                Conheça meu perfil
+            </a>
+        </section>
+
+        <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm rounded-full p-2 mb-12 md:mb-20 flex justify-center space-x-2 md:space-x-4">
+            <button class="tab-button active py-2 px-4 rounded-full text-gray-700 hover:bg-gray-200 transition-colors" data-tab="about">Sobre</button>
+            <button class="tab-button py-2 px-4 rounded-full text-gray-700 hover:bg-gray-200 transition-colors" data-tab="skills">Habilidades</button>
+            <button class="tab-button py-2 px-4 rounded-full text-gray-700 hover:bg-gray-200 transition-colors" data-tab="projects">Projetos</button>
+            <button class="tab-button py-2 px-4 rounded-full text-gray-700 hover:bg-gray-200 transition-colors" data-tab="journey">Jornada</button>
+            <button class="tab-button py-2 px-4 rounded-full text-gray-700 hover:bg-gray-200 transition-colors" data-tab="certifications">Certificações</button>
+        </nav>
+
+        <div id="tab-content" class="max-w-6xl mx-auto">
+            <section id="about" class="tab-panel active py-16 md:py-24 bg-white rounded-xl shadow-sm">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-4">Sobre Mim</h2>
+                    <div class="w-24 h-1 bg-accent-color mx-auto mb-8"></div>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Sou uma profissional em transição de carreira, unindo uma sólida experiência em atendimento e organização com a formação em Análise e Desenvolvimento de Sistemas. 
+                        Minha jornada anterior no magistério me ensinou o valor da comunicação clara e da resolução de problemas, habilidades que hoje aplico no desenvolvimento de software. 
+                        Atualmente, foco em aprimorar minhas competências como desenvolvedora Front-End, buscando minha primeira oportunidade para colaborar com equipes inovadoras, 
+                        aprender com profissionais experientes e transformar desafios em soluções de tecnologia.
+                    </p>
+                </div>
+            </section>
+            
+            <section id="skills" class="tab-panel py-16 md:py-24 bg-white rounded-xl shadow-sm">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-4">Habilidades</h2>
+                    <div class="w-24 h-1 bg-accent-color mx-auto mb-8"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-center">Técnicas (Front-End)</h3>
+                            <ul class="space-y-3">
+                                <li class="bg-gray-100 p-3 rounded-md"><strong>Linguagens:</strong> HTML5, CSS3, JavaScript</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-center">Interpessoais (Soft Skills)</h3>
+                            <ul class="space-y-3">
+                                <li class="bg-gray-100 p-3 rounded-md">Comunicação Efetiva</li>
+                                <li class="bg-gray-100 p-3 rounded-md">Organização e Planejamento</li>
+                                <li class="bg-gray-100 p-3 rounded-md">Trabalho em Equipe e Colaboração</li>
+                                <li class="bg-gray-100 p-3 rounded-md">Proatividade e Iniciativa</li>
+                                <li class="bg-gray-100 p-3 rounded-md">Resolução de Problemas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="tab-panel py-16 md:py-24 bg-white rounded-xl shadow-sm">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-4">Projetos</h2>
+                    <div class="w-24 h-1 bg-accent-color mx-auto mb-8"></div>
+                    <p class="max-w-2xl mx-auto text-lg text-gray-700 mb-12">
+                        Aqui estão alguns projetos que desenvolvi para praticar e demonstrar minhas habilidades.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-500">
+                                 <img src="https://github.com/Milena-soat/itzy_projeto-/blob/main/Imagens%20do%20projeto%20pronto/Capturar.PNG?raw=true" alt="Captura de tela do projeto Landing Page ITZY" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 text-left">
+                                <h3 class="text-xl font-bold mb-2"> ITZY World - Experiência Web Fan-Made</h3>
+                                <p class="text-gray-700 mb-4 text-sm">Desenvolvimento de uma página web responsiva dedicada ao grupo de K-pop ITZY, O projeto foca na apresentação visual do grupo, seus membros e informações essenciais</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">HTML</span>
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">CSS</span>
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">JavaScript</span>
+                                </div>
+                                <div class="flex justify-end space-x-4">
+                                    <a href="https://github.com/Milena-soat/itzy_projeto-" target="_blank" rel="noopener noreferrer" class="font-medium text-gray-600 hover:accent-color">Código ↗</a>
+                                    <a href="https://milena-soat.github.io/itzy_projeto-/" target="_blank" rel="noopener noreferrer" class="font-medium text-gray-600 hover:accent-color">Demo ↗</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-500">
+                                <p class="text-xl font-semibold">Novos projetos em breve!</p>
+                            </div>
+                            <div class="p-6 text-left">
+                                <h3 class="text-xl font-bold mb-2">Próximos Projetos</h3>
+                                <p class="text-gray-700 mb-4 text-sm">Estou trabalhando em novos projetos para expandir minhas habilidades e portfólio. Fique atento para atualizações!</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Em desenvolvimento</span>
+                                </div>
+                                <div class="flex justify-end space-x-4">
+                                    <!-- Links para projetos futuros podem ser adicionados aqui quando estiverem prontos -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-500">
+                                <p class="text-xl font-semibold">Novos projetos em breve!</p>
+                            </div>
+                            <div class="p-6 text-left">
+                                <h3 class="text-xl font-bold mb-2">Mais Projetos</h3>
+                                <p class="text-gray-700 mb-4 text-sm">Continuo aprimorando minhas competências e em breve terei mais trabalhos para compartilhar. Acompanhe!</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Em desenvolvimento</span>
+                                </div>
+                                <div class="flex justify-end space-x-4">
+                                    <!-- Links para projetos futuros podem ser adicionados aqui quando estiverem prontos -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="journey" class="tab-panel py-16 md:py-24 bg-white rounded-xl shadow-sm">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-4">Minha Jornada</h2>
+                    <div class="w-24 h-1 bg-accent-color mx-auto mb-12"></div>
+                    <div class="relative border-l-2 border-gray-200 ml-4">
+                        <div class="mb-10 ml-8 relative timeline-item">
+                            <h3 class="text-lg font-semibold">Tecnóloga em Análise e Desenvolvimento de Sistemas</h3>
+                            <p class="text-sm text-gray-600">Estácio | Jan/2023 – Ago/2025</p>
+                            <p class="mt-2 text-gray-700">Início da minha jornada na tecnologia, focando em desenvolvimento de software e lógica de programação.</p>
+                        </div>
+                        <div class="mb-10 ml-8 relative timeline-item">
+                            <h3 class="text-lg font-semibold">Auxiliar Administrativo (Freelance)</h3>
+                            <p class="text-sm text-gray-600">Nilza Melo Coordenação de Eventos | Dez/2024</p>
+                            <p class="mt-2 text-gray-700">Minha jornada como freelancer auxiliar administrativa em eventos foi marcada por uma constante busca pela excelência.</p>
+                        </div>
+                        <div class="mb-10 ml-8 relative timeline-item">
+                            <h3 class="text-lg font-semibold">Recepcionista (Freelance)</h3>
+                            <p class="text-sm text-gray-600">Nilza Melo Coordenação de Eventos | Jul/2024</p>
+                            <p class="mt-2 text-gray-700">Como recepcionista freelancer, atuei em diversos segmentos, desenvolvendo comunicação eficaz, organização impecável e proatividade.</p>
+                        </div>
+                        <div class="mb-10 ml-8 relative timeline-item">
+                            <h3 class="text-lg font-semibold">Licenciatura (Magistério)</h3>
+                            <p class="text-sm text-gray-600">Colégio Francisco de Assis | Abr/2019 – Dez/2021</p>
+                            <p class="mt-2 text-gray-700">Formação que me deu a base em comunicação, didática e organização.</p>
+                        </div>
+                        <div class="ml-8 relative timeline-item">
+                            <h3 class="text-lg font-semibold">Estagiária</h3>
+                            <p class="text-sm text-gray-600">Colégio Francisco de Assis · Estágio | Fev/2019 – Dez/2021</p>
+                            <p class="mt-2 text-gray-700">Minha trajetória como estagiária de professora foi marcada por desafios e aprendizados constantes, um deles foi ajudar os alunos com os deveres de casa me permitiu identificar suas dificuldades e desenvolver estratégias para auxiliá-los no processo de aprendizagem.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certifications" class="tab-panel py-16 md:py-24 bg-white rounded-xl shadow-sm">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-4">Certificações</h2>
+                    <div class="w-24 h-1 bg-accent-color mx-auto mb-8"></div>
+                    <ul class="space-y-4 text-lg text-gray-700">
+                        <li class="bg-gray-100 p-3 rounded-md">
+                            <strong>Imersão Inteligência Artificial 2º Edição</strong> - Alura (Mai/2024)
+                            <a href="https://cursos.alura.com.br/user/mimicoleto/immersion/certificate/44487" target="_blank" rel="noopener noreferrer" class="ml-4 font-medium text-gray-600 hover:accent-color text-sm">Ver Credencial ↗</a>
+                        </li>
+                        <li class="bg-gray-100 p-3 rounded-md">
+                            <strong>Imersão Dev com Google Gemini</strong> - Alura (Set/2024)
+                            <a href="https://cursos.alura.com.br/user/mimicoleto/immersion/certificate/28266" target="_blank" rel="noopener noreferrer" class="ml-4 font-medium text-gray-600 hover:accent-color text-sm">Ver Credencial ↗</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <section id="contact" class="py-16 md:py-24 bg-gray-800 text-white rounded-xl shadow-sm mt-12 md:mt-20">
+            <div class="max-w-xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Vamos Conversar!</h2>
+                <p class="max-w-xl mx-auto mb-6">Estou aberta a novas oportunidades e adoraria conectar-me com você. Sinta-se à vontade para entrar em contato.</p>
+                <p class="text-lg font-semibold accent-color mb-4">milenasoaresalves02@gmail.com</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="https://www.linkedin.com/in/milena-soares-alves-8984922b9/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity flex items-center space-x-2">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                        <span class="font-medium text-white">LinkedIn</span>
+                    </a>
+                    <a href="https://wa.me/5521987997187" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity flex items-center space-x-2">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12.04 2c-5.45 0-9.91 4.46-9.91 9.91 0 1.75.5 3.42 1.45 4.86l-1.5 5.49 5.6-1.46c1.38.79 2.94 1.25 4.36 1.25 5.45 0 9.91-4.46 9.91-9.91s-4.46-9.91-9.91-9.91zm.04 18.06c-1.33 0-2.6-.35-3.71-1.02l-.26-.15-2.75.72.74-2.67-.17-.27c-.74-1.19-1.15-2.56-1.15-3.99 0-4.52 3.67-8.19 8.19-8.19s8.19 3.67 8.19 8.19c0 4.52-3.67 8.19-8.19 8.19zm4.52-6.16c-.25-.12-.8-.4-.92-.44-.12-.04-.25-.04-.37.12-.12.16-.48.44-.58.56-.1.12-.2.12-.37.04-.12-.04-.5-.18-1-.62-.4-.44-.66-.8-.74-.92-.08-.12-.08-.12-.04-.25.04-.12.1-.25.16-.37.06-.12.03-.25 0-.37-.04-.12-.37-.92-.5-.12-.12.8-.25 1.4-.12 1.62.12.25.25.37.4.5.16.12.3.18.44.2.12.04.8.12 1.62.74.8.58 1.48 1.28 1.66 1.38.18.12.25.1.37-.04.12-.12.37-.48.48-.62.12-.12.12-.25.08-.37z"/>
+                        </svg>
+                        <span class="font-medium text-white">WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6 text-center">
+        <p class="text-sm text-gray-400">&copy; 2025 Milena Soares. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and panels
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanels.forEach(panel => panel.classList.remove('active'));
+
+                // Add active class to the clicked button
+                button.classList.add('active');
+
+                // Get the target tab panel ID from the data-tab attribute
+                const targetTabId = button.dataset.tab;
+                const targetPanel = document.getElementById(targetTabId);
+
+                // Add active class to the target panel
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize the first tab as active on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialTabButton = document.querySelector('.tab-button.active');
+            const initialTabPanelId = initialTabButton ? initialTabButton.dataset.tab : 'about';
+            const initialTabPanel = document.getElementById(initialTabPanelId);
+            if (initialTabPanel) {
+                initialTabPanel.classList.add('active');
+            }
+        });
+
+        // Smooth scroll for hero button - now points to the first tab content
+        document.querySelector('#hero a').addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1); // Get the ID without '#'
+            const targetElement = document.getElementById(targetId);
+
+            // Activate the corresponding tab button
+            tabButtons.forEach(btn => {
+                if (btn.dataset.tab === targetId) {
+                    btn.click(); // Simulate click to activate tab and scroll
+                }
+            });
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100, // Adjust for sticky nav if needed
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Smooth scroll for the "Contato" button in the header
+        document.querySelector('header nav a[href="#contact"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Adjust for fixed header height
+                    behavior: 'smooth'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
